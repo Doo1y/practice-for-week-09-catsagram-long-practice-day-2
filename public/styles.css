@@ -1,0 +1,71 @@
+.up-arrow,
+.down-arrow {
+  box-sizing: border-box;
+  height: 2vw;
+  width: 2vw;
+  border-style: solid;
+  border-width: 0px 1px 1px 0px;
+  transform: rotate(45deg);
+  transition: border-width 150ms ease-in-out;
+  transition: border-radius 150ms ease-in-out;
+}
+
+.up-arrow:hover,
+.down-arrow:hover {
+  border-bottom-width: 4px;
+  border-right-width: 4px;
+  border-bottom-left-radius: 15%;
+  border-top-right-radius: 15%;
+}
+
+.up-arrow {
+  transform: rotate(225deg);
+}
+
+#replace-btn {
+  margin-top: 30px;
+}
+
+.image-box {
+  display: flex;
+  flex-direction: row;
+  column-gap: 6%;
+}
+
+#kitten-image {
+  display: block;
+  max-width: 800px;
+  max-height:450px;
+  width: auto;
+  height: auto;
+}
+
+#user-options {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 68px;
+}
+
+#comments-form {
+  min-width: 600px;
+  max-width: 1800px;
+  width: -webkit-fill-available;
+  margin-top: 1.5%;
+}
+
+.form-child {
+  display: flex;
+  column-gap: 10px;
+  justify-content: center;
+}
+
+#comments-form > ul {
+  border: 1px solid black;
+  margin-left: 15%;
+  margin-right: 15%;
+  width: -webkit-fill-available;
+  min-height: 300px;
+}
