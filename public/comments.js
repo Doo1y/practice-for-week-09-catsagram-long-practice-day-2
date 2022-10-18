@@ -1,3 +1,6 @@
+import { saveAll } from "./restore.js";
+
+
 export const createCommentsForm = () => {
   const commentDiv = document.createElement("div");
   commentDiv.className = "form form-child";
@@ -11,6 +14,7 @@ export const createCommentsForm = () => {
   textArea.placeholder = "Add a comment...";
 
   const submitBtn = document.createElement("input");
+  submitBtn.id = "submit"
   submitBtn.type = "submit";
 
   const commentsList = document.createElement("ul");
@@ -22,10 +26,11 @@ export const createCommentsForm = () => {
       const comment = document.createElement("li");
       comment.innerText = document.querySelector("input[type='text']").value
       commentsList.appendChild(comment);
-      document.querySelector("input[type='text']").value = ""
+      saveAll()
+      document.querySelector("input[type='text']").value = "";
     }
     event.preventDefault();
-  })
+  });
 
   commentDiv.append(labelEl, textArea, submitBtn);
   document.querySelector("#comments-form").append(commentDiv, commentsList)

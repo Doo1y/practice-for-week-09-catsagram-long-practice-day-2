@@ -1,3 +1,5 @@
+import { saveAll } from "./restore.js";
+
 export const createMainContent = () => {
   // Create h1
   const h1 = document.createElement("h1");
@@ -12,21 +14,19 @@ export const createMainContent = () => {
   container.prepend(h1);
   imageBox.appendChild(img);
 
-  fetchImage();
+  if (!localStorage.getItem("currImg")) fetchImage();
 };
 
 let score = 0;
 
-export const fetchNewImage = () => {
+export const fetchNew = () => {
   // Add a button that requests and displays a new cat image, replacing the original image
   const replaceBtn = document.createElement("button");
-  replaceBtn.id = "replace-btn"
-  replaceBtn.type = "button";
-  replaceBtn.innerText = "New Cat";
+  replaceBtn.id = "replace-btn";
+  replaceBtn.innerText = "Fetch New";
 
   replaceBtn.addEventListener("click", () => {
     fetchImage();
-    score = 0;
     document.querySelector("#total-votes").innerText = 0;
     document.querySelector("input[type='text']").value = "";
     const list = document.querySelector("ul");
@@ -34,8 +34,9 @@ export const fetchNewImage = () => {
       list.firstChild.remove();
     }
   });
+  
+  document.querySelector("#user-options").append(replaceBtn);
 
-  document.querySelector("#user-options").appendChild(replaceBtn);
 }
 
 export const createVoteElements = () => {
@@ -57,12 +58,12 @@ export const createVoteElements = () => {
   votesDiv.innerText = score;
   const imageBox = document.querySelector(".image-box")
   upVote.addEventListener("click", () => {
-    score += 1;
-    votesDiv.innerText = score;
+    votesDiv.innerText = Number(votesDiv.innerText) + 1;
+    saveAll()
   });
   downVote.addEventListener("click", () => {
-    score -= 1;
-    votesDiv.innerText = score;
+    votesDiv.innerText = Number(votesDiv.innerText) - 1;
+    saveAll()
   })
 
   voteOptions.append(upVote, votesDiv, downVote);
@@ -78,11 +79,8 @@ const fetchImage = async () => {
     // console.log(kittenData);
     const kittenImg = document.querySelector("img");
     kittenImg.src = kittenData[0].url;
+    saveAll()
   } catch (e) {
     console.log("Failed to fetch image", e);
   }
 };
-
-function getValue(string) {
-  return Number(string.slice(0, string.length - 2))
-}

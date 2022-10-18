@@ -1,5 +1,6 @@
-import { createMainContent, fetchNewImage, createVoteElements } from './main.js';
+import { createMainContent, fetchNew, createVoteElements } from './main.js';
 import { createCommentsForm } from "./comments.js"
+import { saveAll, restoreData } from "./restore.js"
 
 const initializePage = () => {
   // Create container
@@ -25,9 +26,10 @@ const initializePage = () => {
 
 window.onload = () => {
   initializePage();
-  createMainContent();
+  createMainContent(); 
   createVoteElements();
   createCommentsForm();
-  fetchNewImage();
-
+  fetchNew();
+  if (localStorage.getItem("currImg"))restoreData();
+  saveAll();
 };
